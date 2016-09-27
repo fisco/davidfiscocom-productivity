@@ -1,0 +1,6 @@
+{% if page.ragAdjust == true or (site.ragAdjust == true and page.ragAdjust != false) %}
+<script>
+    {% include libraries/ragadjust.min.js %}
+    ragadjust('p, li, dd', 'all');
+</script>
+{% endif %}

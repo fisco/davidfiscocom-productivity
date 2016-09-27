@@ -1,0 +1,72 @@
+{% assign headerTitle = '' %}
+{% assign titleArray = page.title | split: ' ' %}
+{% for w in titleArray %}
+  {% if forloop.last == true %}
+    {% capture headerTitle %}{{ headerTitle }}&nbsp;{{ w }}{% endcapture %}
+  {% else %}
+    {% capture headerTitle %}{{ headerTitle }} {{ w }}{% endcapture %}
+  {% endif %}
+{% endfor %}
+{% capture headerTitle %}{{ headerTitle | trim }}{% endcapture %}
+{% capture headerTitle %}{% if page.microdataSchema == 'Recipe' %}Recipe: {% endif %}{{ headerTitle }}{% endcapture %}
+
+<!-- Determine type of page. One of "regular", "topic" or "homepage" -->
+{% assign typeOfPage = 'regular' %}
+{% if page.isHomepage == 'yes' and site.subdomain == 'www' %}{% assign typeOfPage = 'homepage' %}{% endif %}
+{% if page.isTopicPage == 'yes' %}{% assign typeOfPage = 'topic' %}{% endif %}
+
+{% if typeOfPage == 'homepage' %}{% assign headerTitle = "Home" %}{% endif %}
+{% if typeOfPage == 'topic' %}{% assign headerTitle = site.topic | split: " " | join: "-----" | camelcase | split: "-----" | join: " " %}{% endif %}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div style="height: .6vh; min-height: 6px;"></div>
+  </div>
+</div>
+
+<!-- {% increment position_counter %} -->
+<div class="row" id="site-header-breadcrumbs" itemid="#breadcrumblist" itemscope itemtype="https://schema.org/BreadcrumbList">
+  {% if typeOfPage != 'homepage' %}
+    <div class="col-xs-12">
+      <div class="inactive" style="background-color: #f5f5f5; border-radius: 4px; padding: .5em;">
+        <span class="addCaret" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <a itemprop="item" href="https://www.davidfisco.com/" title="David Fisco's homepage">
+            <span itemprop="name">
+              Home
+            </span>
+          </a>
+          <meta itemprop="position" content="{% increment position_counter %}" />
+        </span>
+        {% if typeOfPage != 'topic' and site.subdomain != 'www' %}
+          <span class="addCaret" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="{{ site.url }}" title="Topic page: {{ site.topic | capitalize }}">
+              <span itemprop="name">
+                {{ site.topic | capitalize }}
+              </span>
+            </a>
+            <meta itemprop="position" content="{% increment position_counter %}" />
+          </span>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+  {% if headerTitle != "Home" %}
+  <div class="col-xs-12" style="margin-top: 1em;">
+    <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span id='fisco-page-title-in-breadcrumb' itemprop="name">
+        <a itemprop="item" href="{{ site.url }}{{ page.url }}" style="color: inherit; text-decoration: inherit; cursor: default; font-size: 2.5rem;" title="Title of current page">
+          {{ headerTitle | smartify }}
+        </a>
+        <meta itemprop="position" content="{% increment position_counter %}" />
+      </span>
+    </span>
+  </div>
+  {% endif %}
+</div>
+
+{% capture string1 %}{{ page.pageSchema['@type'] }}{% endcapture %}
+{% capture string2 %}{{ headerTitle | smartify }}{% endcapture %}
+{% include json-ld-simple-value-script-display.html id="#pageSchema" key="name" value=string2 %}
+{% include json-ld-simple-value-script-display.html id="#pageSchema" key="headline" value=string2 %}
+{% capture string2 %}{{ site.url }}{{ page.url }}{% endcapture %}
+{% include json-ld-simple-value-script-display.html id="#pageSchema" key="url" value=string2 %}

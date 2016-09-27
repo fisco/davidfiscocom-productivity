@@ -1,0 +1,53 @@
+{% include liquid/calculate-pub-dates.liquid %}
+
+{% if modifiedtime or page.date %}
+  <dl id="pubInfoTable" hidden>
+    {% if page.date %}
+      <dt>Published:</dt>
+      <dd style="margin-left: 1rem;">{{ page.date | date: "%e %B %Y" }}</dd>
+    {% endif %}
+    {% if modifiedtime %}
+      <dt>Modified:</dt>
+      <dd style="margin-left: 1rem;">{{ modifiedtime | date: "%e %B %Y" }}</dd>
+    {% endif %}
+    {% if lastReviewed %}
+      <dt>Last reviewed:</dt>
+      <dd style="margin-left: 1rem;">{{ lastReviewed | date: "%e %B %Y" }}</dd>
+    {% endif %}
+  </dl>
+
+
+  <button class="btn btn-default"
+          data-container="body"
+          data-toggle="popover"
+          data-trigger="click hover"
+          data-placement="auto"
+          id="pubInfoPopover">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+  </button>
+
+  <script>
+    $(function () {
+      $("#pubInfoPopover").popover({
+        html: true,
+        content: function() {
+          return $("#pubInfoTable").html();
+        },
+        title: function() {
+          return "<b>Publication information</b>";
+        },
+        viewport: function() {
+          return $('#payload-fisco');
+        }
+      });
+    });
+  </script>
+{% endif %}
+
+{% capture string2 %}{{ page.date | date: "%Y-%m-%d" }}{% endcapture %}
+{% include json-ld-simple-value-script-display.html id="#pageSchema" key="dateCreated" value=string2 %}
+{% include json-ld-simple-value-script-display.html id="#pageSchema" key="datePublished" value=string2 %}
+{% capture string2 %}{{ modifiedtime | date: "%Y-%m-%d" }}{% endcapture %}
+{% include json-ld-simple-value-script-display.html id="#pageSchema" key="dateModified" value=string2 %}
+{% capture string2 %}{{ lastReviewed | date: "%Y-%m-%d" }}{% endcapture %}
+{% include json-ld-simple-value-script-display.html id="#pageSchema" key="lastReviewed" value=string2 %}

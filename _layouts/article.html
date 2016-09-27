@@ -1,0 +1,52 @@
+---
+layout: default
+---
+
+{% include publication-metadata-row.html %}
+
+<article id="mainArticle">
+  {{ content }}
+</article>
+
+<!-- Begin JSON-LD Schema -->
+
+<script type="application/ld+json">
+  {{ page.articleSchema | jsonify }}
+</script>
+
+{% capture string %}{{ page.title | smartify }}{% endcapture %}
+{% include json-ld-simple-value-script-display.html id="#articleSchema" type="Article" key="headline" value=string %}
+
+{% include liquid/calculate-pub-dates.liquid %}
+{% if page.date %}
+  {% capture string %}{{ page.date | date: "%Y-%m-%d" }}{% endcapture %}
+  {% include json-ld-simple-value-script-display.html id="#articleSchema" type="Article" key="dateCreated" value=string %}
+  {% include json-ld-simple-value-script-display.html id="#articleSchema" type="Article" key="datePublished" value=string %}
+{% endif %}
+{% if modifiedtime %}
+  {% capture string %}{{ modifiedtime | date: "%Y-%m-%d" }}{% endcapture %}
+  {% include json-ld-simple-value-script-display.html id="#articleSchema" type="Article" key="dateModified" value=string %}
+{% endif %}
+
+{% capture string %}{{ content | markdownify | strip_html }}{% endcapture %}
+{% include json-ld-simple-value-script-display.html id="#articleSchema" type="Article" key="articleBody" value=string %}
+
+{% capture string %}{{ content | markdownify | strip_html | number_of_words }}{% endcapture %}
+{% include json-ld-simple-value-script-display.html id="#articleSchema" type="Article" key="wordCount" value=string %}
+
+{% if page.copyrightcontract == 'cc-a-nc-sa-3.0' %}
+  {% include json-ld-simple-value-script-display.html id="#articleSchema" type="Article" key="license" value="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US" %}
+{% else %}
+  {% include liquid/first-year-of-copyright.liquid %}
+  {% include json-ld-simple-value-script-display.html id="#articleSchema" type="Article" key="copyrightYear" value=firstYearOfCopyright %}
+  {% capture string %}{{ site.url }}{{ page.url }}#fiscocopyright{% endcapture %}
+  {% include json-ld-simple-value-script-display.html id="#articleSchema" type="Article" key="license" value=string %}
+{% endif %}
+
+{% if page.disqus_shortname and page.disqus_shortname.size > 0 %}
+  {% capture string %}{{ site.url }}{{ page.url }}#disqusthread{% endcapture %}
+  {% include json-ld-simple-value-script-display.html id="#articleSchema" type="Article" key="discussionUrl" value=string %}
+{% endif %}
+
+{% capture string %}{{ page.keywords | join: ", " }}{% endcapture %}
+{% include json-ld-simple-value-script-display.html id="#articleSchema" type="Article" key="keywords" value=string %}

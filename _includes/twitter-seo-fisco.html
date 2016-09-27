@@ -1,0 +1,13 @@
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@davidfisco">
+<meta name="twitter:title" content="{{ page.title }}">
+<meta name="twitter:description" content="{{ page.descriptiontwitter }}">
+<!-- Twitter summary card with image must be a minimum size of 120x120px. -->
+{% if page.imagetwitter.size > 0 or page.primaryImageOfPage.size > 0 %}
+  {% if page.imagetwitter.size > 0 %}
+    {% assign timage = page.imagetwitter %}
+  {% else %}
+    {% assign timage = page.primaryImageOfPage %}
+  {% endif %}
+  <meta name="twitter:image" content="{{ timage }}">
+{% endif %}

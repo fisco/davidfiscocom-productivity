@@ -1,0 +1,93 @@
+{% assign authorFullName = "" %}
+{% if page.author.lastName  %}
+  {% assign authorFullName = authorFullName | prepend: page.author.lastName %}
+{% endif %}
+{% if page.author.middleName and include.include_middle_name  %}
+  {% assign authorFullName = authorFullName | prepend: " " | prepend: page.author.middleName %}
+{% endif %}
+{% if page.author.firstName %}
+  {% assign authorFullName = authorFullName | prepend: " " | prepend: page.author.firstName %}
+{% endif %}
+{% assign authorFullName = authorFullName | lstrip | rstrip %}
+{% capture authorInfoContactPopoverContentVersion %}{% increment authorInfoContactPopoverContentCounter %}{% endcapture %}
+
+{% assign showInfo = false %}
+{% assign showBiography = false %}
+{% assign showTwitter = false %}
+{% if page.author.bioPage and include.excludeBioPage != true %}
+  {% assign showBiography = true %}
+  {% assign showInfo = true %}
+{% endif %}
+{% if page.author.twitterHandle and include.excludetTwitterHandle != true %}
+  {% assign showTwitter = true %}
+  {% assign showInfo = true %}
+{% endif %}
+
+{% assign showContact = false %}
+{% assign showWebContact = false %}
+{% assign showEmail = false %}
+{% if page.author.webpageContact and include.excludeWebpageContact != true %}
+  {% assign showWebContact = true %}
+  {% assign showContact = true %}
+{% endif %}
+{% if page.author.emailAddress and include.excludeEmailAddress != true %}
+  {% assign showEmail = true %}
+  {% assign showContact = true %}
+{% endif %}
+
+{% assign popUpAvailable = false %}
+{% if showInfo or showContact %}
+  {% assign popUpAvailable = true %}
+{% endif %}
+
+{% if popUpAvailable %}
+<div id="authorInfoContactPopoverContent-{{ authorInfoContactPopoverContentVersion }}" hidden>
+  {% if showInfo %}
+    <p style="margin-bottom: 0;"><strong>Info:</strong></p>
+    <ul>
+      {% if showBiography %}
+        <li><a href="{{ page.author.bioPage }}" title="Biography">Biography</a></li>
+      {% endif %}
+      {% if showTwitter %}
+        <li><a href="https://twitter.com/{{ page.author.twitterHandle }}" title="Twitter page">Twitter page</a></li>
+      {% endif %}
+    </ul>
+  {% endif %}
+  {% if showContact%}
+    <p style="margin-bottom: 0;"><strong>Contact:</strong></p>
+    <ul>
+      {% if showWebContact %}
+        <li><a href="{{ page.author.webpageContact }}" title="Contact by webpage">Contact by webpage</a></li>
+      {% endif %}
+      {% if showEmail %}
+        <li><a href="mailto:{{ page.author.emailAddress }}?subject=Feedback+from+website" title="Send email">Send email</a></li>
+      {% endif %}
+    </ul>
+  {% endif %}
+</div>
+
+<script>
+  $(function () {
+    $('#authorInfoContactPopover-{{ authorInfoContactPopoverContentVersion }}')
+    .popover({
+      html: true,
+      content: function() {
+        return $("#authorInfoContactPopoverContent-{{ authorInfoContactPopoverContentVersion }}").html();
+      },
+      title: function() {
+        return "<b>Info &amp; contact: {{ authorFullName | replace: '"', '\"' }}</b>";
+      },
+      viewport: function() {
+        return $('#payload-fisco');
+      }
+    });
+  });
+</script>
+
+<a href="#" role="button"
+            data-container="body"
+            data-trigger="click"
+            data-placement="auto"
+            data-toggle="popover"
+            onmouseover="$(this).attr('title', 'Author information');"
+            id="authorInfoContactPopover-{{ authorInfoContactPopoverContentVersion }}">{{ authorFullName }}</a>{% else %}{{ authorFullName }}{% endif %}

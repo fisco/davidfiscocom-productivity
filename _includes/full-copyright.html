@@ -1,0 +1,10 @@
+{% include liquid/first-year-of-copyright.liquid %}
+
+<p class='copyright-fisco full-copyright'>Copyright &copy; {{ firstYearOfCopyright }}{% if currentYear != firstYearOfCopyright %} - {{ currentYear }}{% endif %} by {{ site.data.davidfisco.firstAndLastName }}. All rights reserved worldwide. Requests for licensing and distribution can be emailed to
+  <a name="fiscocopyright" href='mailto:dave@davidfisco.com?subject=copyright+inquiry'>David Fisco</a>.
+</p>
+
+{% capture string2 %}{{ firstYearOfCopyright }}{% endcapture %}
+{% include json-ld-simple-value-script-display.html id="#pageSchema" key="copyrightYear" value=string2 %}
+{% capture string2 %}{{ site.url }}{{ page.url }}#fiscocopyright{% endcapture %}
+{% include json-ld-simple-value-script-display.html id="#pageSchema" key="license" value=string2 %}

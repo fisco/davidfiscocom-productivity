@@ -1,0 +1,48 @@
+<!--
+excludeByLine: true/false, default false
+excludePublicationDateInformation: true/false, default false
+-->
+
+{% assign excludePublicationDateInformation = false %}
+{% if include.excludeByLine and include.excludePublicationDateInformation %}
+  {% assign excludePublicationDateInformation = true %}
+{% endif %}
+{% if page.excludePublicationDateInformation == 'yes' %}
+  {% assign excludePublicationDateInformation = true %}
+{% endif %}
+
+{% unless excludePublicationDateInformation %}
+  <div class="row bottom-align-row" style="margin-bottom: 1rem;">
+    <div class="col-sm-6 col-xs-12" style="font-size: .9rem;">
+      <div style="vertical-align: bottom;">
+        {% unless include.excludeByLine == true %}
+          by {% include author-infocontact-popover.html include_middle_name=false %}
+        {% endunless %}
+      </div>
+    </div>
+    <div class="col-sm-1 col-xs-12" style="font-size: .9rem;">
+      <div style="min-height: .25rem"></div>
+    </div>
+    <div class="articleMetadata col-sm-5 col-xs-12" style="font-size: .9rem;">
+      {% unless include.excludePublicationDateInformation == true %}
+        {% include publication-date-information.html %}
+      {% endunless %}
+      {% include time-for-reading.html %}
+      {% unless page.excludeSocialMedia == 'yes' %}
+        {% include social-media-share-custom-button.html %}
+      {% endunless %}
+    </div>
+  </div>
+{% endunless %}
+
+<style>
+  .articleMetadata {
+    text-align: right;
+  }
+
+  @media (max-width: 767px) {
+    .articleMetadata {
+      text-align: left;
+    }
+  }
+</style>

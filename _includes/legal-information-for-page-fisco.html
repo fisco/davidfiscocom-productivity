@@ -1,0 +1,9 @@
+{% include liquid/determine-copyright-notice.liquid %}
+
+{% if copyrightNotice %}
+  {% include {{copyrightNotice}} %}
+{% endif %}
+
+{% if page.softwaredisclaimer == 'yes' %}
+  <p class='software-disclaimer'>{{ site.data.legal.softwaredisclaimer }}</p>
+{% endif %}

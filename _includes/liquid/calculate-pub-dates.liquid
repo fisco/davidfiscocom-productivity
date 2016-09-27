@@ -1,0 +1,11 @@
+{% assign modifiedtime=nil %}
+{% if page.updated.size > 0 %}
+  {% assign modifiedtime=page.updated %}
+{% endif %}
+
+{% assign lastReviewed = nil %}
+{% if page.lastReviewed.size > 0 %}
+  {% assign lastReviewed = page.lastReviewed %}
+{% else if page.updated.size > 0 %}
+  {% capture lastReviewed %}{% if page.updated %}{{ page.updated | date: "%Y-%m-%d" }}{% else %}{{ page.date | date: "%Y-%m-%d" }}{% endif %}{% endcapture %}
+{% endif %}

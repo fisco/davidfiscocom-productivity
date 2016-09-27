@@ -1,0 +1,56 @@
+{% assign numberOfWords = page.content | markdownify | strip_html | number_of_words %}
+{% assign totalMinutes = numberOfWords | divided_by: 200 %}
+{% assign numberOfHours = totalMinutes | divided_by: 60 %}
+{% assign numberOfMinutes = totalMinutes | modulo: 60 %}
+{% assign readTime = 'Less than 1 minute' %}
+{% if numberOfWords > 199 %}
+  {% assign readTime = '' %}
+  {% if numberOfHours > 0 %}
+    {% capture readTime %}{{ numberOfHours }} hour{% endcapture %}
+    {% if numberOfHours != 1 %}
+      {% capture readTime %}{{ readTime }}s{% endcapture %}
+    {% endif %}
+    {% if numberOfMinutes > 0 %}
+      {% capture readTime %}{{ readTime }}, {% endcapture %}
+    {% endif %}
+  {% endif %}
+  {% if numberOfMinutes > 0 %}
+    {% capture readTime %}{{ readTime }}{{ numberOfMinutes }} minute{% endcapture %}
+    {% if numberOfMinutes != 1 %}
+      {% capture readTime %}{{ readTime }}s{% endcapture %}
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+<dl id="readingTime" hidden>
+  <dt>Word count:</dt>
+  <dd style="margin-left: 1rem;">{{ numberOfWords }}</dd>
+  <dt>Estimated reading time:</dt>
+  <dd style="margin-left: 1rem;">{{ readTime }}</dd>
+</dl>
+
+<button class="btn btn-default"
+        data-container="body"
+        data-toggle="popover"
+        data-trigger="click hover"
+        data-placement="auto"
+        id="pubReadingTimePopover">
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+</button>
+
+<script>
+  $(function () {
+    $("#pubReadingTimePopover").popover({
+      html: true,
+      content: function() {
+        return $("#readingTime").html();
+      },
+      title: function() {
+        return "<b>Reading Time</b>";
+      },
+      viewport: function() {
+        return $('#payload-fisco');
+      }
+    });
+  });
+</script>

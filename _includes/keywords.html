@@ -1,0 +1,6 @@
+{% if page.keywords.size > 0 %}
+  <meta name="keywords" content="{{ page.keywords | stringify }}">
+
+  {% capture value_string %}{{ page.keywords | join: ", " }}{% endcapture %}
+  {% include json-ld-simple-value-script-display.html key="keywords" value=value_string %}
+{% endif %}

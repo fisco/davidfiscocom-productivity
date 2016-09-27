@@ -1,0 +1,35 @@
+<div class='clearfix dropdown hide' id='davidfisco-social-dropdown' style='position:absolute;z-index:2000;'>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+        <li><a tabindex="-1" href="https://docs.google.com/a/davidfisco.com/forms/d/1owZHNQmZIrgWpuz3G6peKm-9JV8Ulypz4K5VLTdHen8/viewform"><i class='fa fa-envelope-o fisco-bootstrap-menu-icon-left'></i>Contact via web form</a></li>
+        <li><a tabindex="-1" class='captcha_reveal_email_david_fisco email-button-fisco' href='http://www.google.com/recaptcha/mailhide/d?k=01s9_vxXcu4bIHxZ3RnEGCag==&amp;c=ErkK_CpjGlH_OfuGIWzHgizVQgRzpvHItJvrEyCadl4=' title='Get David Fisco&apos;s email address'><span class='fisco-bootstrap-menu-icon-left'>@</span>Email address</a></li>
+        <li class="divider"></li>
+        <li><a tabindex="-1" href="https://plus.google.com/116734396562610707415/posts"><i class='fa fa-google-plus fisco-bootstrap-menu-icon-left'></i>Google+</a></li>
+        <li><a tabindex="-1" href="https://twitter.com/intent/user?screen_name=davidfisco"><i class='fa fa-twitter twitter-blue fisco-bootstrap-menu-icon-left'></i>Twitter</a></li>
+    </ul>
+</div>
+
+<script>
+$(document).ready(function() {
+    "use strict"; 
+
+    $(document).on("click", ".davidfisco-social-dropdown", function (event) {
+        "use strict";
+        
+        event.preventDefault();
+        $('#davidfisco-social-dropdown').css({
+            display: 'block',
+            left: event.pageX,
+            top: event.pageY
+        });
+        $('#davidfisco-social-dropdown').removeClass('hide');
+    });
+
+    $(document).click(function (event) {
+        "use strict";
+        
+        if (!$(event.target).hasClass('davidfisco-social-dropdown')) {
+            $('#davidfisco-social-dropdown').addClass('hide');
+        }
+    });
+});
+</script>

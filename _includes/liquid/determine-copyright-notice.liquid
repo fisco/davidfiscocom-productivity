@@ -1,0 +1,8 @@
+{% assign copyrightNotice =  nil %}
+{% unless site.excludeCopyright == 'yes' or page.excludeCopyright == 'yes' %}
+  {% if page.copyrightcontract == 'cc-a-nc-sa-3.0' %}
+    {% assign copyrightNotice = "cc-a-nc-sa-3.0.html" %}
+  {% else %}
+    {% assign copyrightNotice = "full-copyright.html" %}
+  {% endif %}
+{% endunless %}

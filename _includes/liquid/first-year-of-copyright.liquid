@@ -1,0 +1,2 @@
+{% capture currentYear %}{{ site.time | date: "%Y" }}{% endcapture %}
+{% capture firstYearOfCopyright %}{% if page.date %}{{ page.date | date: "%Y" }}{% else %}2003{% endif %}{% endcapture %}

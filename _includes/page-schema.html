@@ -1,0 +1,5 @@
+{% assign schemaForThisPage = page.schemaForThisPage | default: 'pageSchema' %}
+
+<script type="application/ld+json">
+  {{ page[schemaForThisPage] | jsonify }}
+</script>

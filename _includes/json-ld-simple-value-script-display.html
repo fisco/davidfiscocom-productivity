@@ -1,0 +1,24 @@
+{% if false %}
+include.key: REQUIRED, the key of the JSON-LD object, to be passed through jsonify
+include.value: REQUIRED, the value of the JSON-LD object, to be passed through jsonify
+include.id: The unique identification of the object you are adding data to. If absent, set to "#pageSchema"
+include.type: The JSON-LD Schema classification of the object you are adding data to. If absent, uses algorithm to determine from context.
+{% endif %}
+
+{% assign defaultType = "WebPage" %}
+{% unless include.type %}
+  {% if page.schemaForThisPage.size > 0 %}
+    {% assign pageType = page[page.schemaForThisPage]["@type"] %}
+  {% endif %}
+{% endunless %}
+
+{% if include.key.size > 0 and include.value.size > 0 %}
+  <script type="application/ld+json">
+  {
+    "@id": {{ include.id | default: "#pageSchema" | jsonify }},
+    "@context": "https://schema.org",
+    "@type": {{ pageType | default: defaultType | jsonify }},
+    {{ include.key | jsonify }}: {{ include.value | jsonify }}
+  }
+  </script>
+{% endif %}
