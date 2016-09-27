@@ -1,0 +1,135 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+baseurl: "" # the subpath of your site, e.g. /blog
+domain: "davidfisco.com"
+description: > # this means to ignore newlines until "domain:"
+  Articles and tips on productivity offered by David Fisco.
+email: dave@davidfisco.com
+name: David Fisco
+exclude: ['build', 'package.json', 'Gemfile', 'Gemfile,lock', 'Gruntfile.js', 'node_modules']
+production: 1
+github_username:  fisco
+safe: 0
+og-image: "https://www.davidfisco.com/icons/icon-apple.png"
+specialty: &specialty ['productivity']
+subdomain: productivity
+timezone: "America/New_York"
+title: "David Fisco"
+topic: Productivity
+twitter_username: davidfisco
+url: "https://productivity.davidfisco.com" # the base hostname & protocol for your site
+
+gems:
+- jekyll-sitemap
+
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      audienceTargets: &audienceTargets [students, learners, researchers]  # Target groups associated with a given audience (e.g. veterans, car owners, musicians, etc.)
+      author:
+        bioPage: https://www.davidfisco.com/about.html
+        emailAddress: dave@davidfisco.com
+        firstName: David
+        lastName: Fisco
+        middleName: Charles
+        twitterHandle: davidfisco
+        schemaPersonUrl: https://www.davidfisco.com/about.html#davidfisco
+        webpageContact: https://docs.google.com/a/davidfisco.com/forms/d/e/1FAIpQLSdJu7rT0xvoAd7YobyuoLWVacAcooQXnGtsPKtJmmr_mtcx2g/viewform
+      copyrightcontract: ""
+      description: &description "Personal wikis offered by David Fisco."
+      descriptionog_s: "Articles and tips on productivity offered by David Fisco."
+      descriptiontwitter: 'Articles and tips on productivity offered by David Fisco.'
+      layout': "default"
+      microdataSchema: "Article"
+      schemaForThisPage: "itemPageSchema"
+      softwaredisclaimer: "no"
+      typeog: "article"
+      # BEGIN SCHEMA.ORG
+      # CreativeWork
+      creativeWorkSchema: &creativeWork
+        '@context': https://schema.org
+        '@type': CreativeWork
+        '@id': '#creativeWork'
+        accountablePerson:
+          '@type': Person
+          '@id': https://www.davidfisco.com/about.html#davidfisco
+          name: David Fisco
+        author:
+          '@type': Person
+          '@id': https://www.davidfisco.com/about.html#davidfisco
+          name: David Fisco
+        copyrightHolder:
+          '@type': Person
+          '@id': https://www.davidfisco.com/about.html#davidfisco
+          name: David Fisco
+        creator:
+          '@type': Person
+          '@id': https://www.davidfisco.com/about.html#davidfisco
+          name: David Fisco
+        editor:
+          '@type': Person
+          '@id': https://www.davidfisco.com/about.html#davidfisco
+          name: David Fisco
+        genre: "non-fiction"
+        about:
+          '@type': Thing
+          description: *description
+        audience:
+          '@type': Audience
+          audienceType: *audienceTargets
+      # WebPage
+      pageSchema: &pageSchema
+        <<: *creativeWork
+        '@type': WebPage
+        '@id': '#pageSchema'
+        breadcrumb:
+          '@type': BreadcrumbList
+          '@id': '#breadcrumblist'
+        mainContentOfPage:
+          '@type': WebPageElement
+          '@id': '#mainContentOfPage'
+        specialty:
+          '@type': Specialty
+          name: *specialty
+        reviewedBy:
+          '@type': Person
+          '@id': https://www.davidfisco.com/about.html#davidfisco
+          name: David Fisco
+      #  ItemPage
+      itemPageSchema:
+        <<: *pageSchema
+        '@type': ItemPage
+      #  CollectionPage
+      collectionPageSchema:
+        <<: *pageSchema
+        '@type': CollectionPage
+      # Article
+      articleSchema: &articleschema
+        <<: *creativeWork
+        '@type': Article
+        '@id': '#articleSchema'
+        isPartOf:
+          '@type': WebPage
+          '@id': '#pageSchema'
+        mainEntityOfPage:
+          '@type': WebPage
+          '@id': '#pageSchema'
+        publisher:
+          '@type': Organization
+          '@id': https://www.davidfisco.com/#davidfiscoorganization
+        image: https://www.davidfisco.com/images/logo.png
+      # BlogPosting
+      blogPostingSchema:
+        <<: *articleschema
+        '@type': BlogPosting
+        '@id': '#blogPostingSchema'
+
+      # END SCHEMA.ORG #pageSchema
