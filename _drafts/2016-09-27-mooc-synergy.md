@@ -19,7 +19,7 @@ foreign language transcripts become a lesson for your foreign language. Copying 
 
 #### Case Study
 
-Having no experience with the programming language Scala, I signed up for Coursera's [Functional Programming Principles in Scala}(https://www.coursera.org/learn/progfun1/home/welcome) course. Viewing the first lecture, I learned that the transcripts were available in several languages, including French.
+Having no experience with the programming language Scala, I signed up for Coursera's [Functional Programming Principles in Scala](https://www.coursera.org/learn/progfun1/home/welcome) course. Viewing the first lecture, I learned that the transcripts were available in several languages, including French.
 
 I make it a habit to dedicate 20 minutes each day to learning French, using a variety of online sources. But, for now, the online sources are on hold as I spend those daily 20-minute sessions copying the Scala lectures in French. Not only am I strengthening my French, but also I'm reviewing my auto-didactic efforts in French.
 
