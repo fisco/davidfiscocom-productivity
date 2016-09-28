@@ -14,7 +14,7 @@ Here's where the synergy comes in: If a course you're interested in offers trans
 
 Having no experience with the programming language Scala, I signed up for Coursera's [Functional Programming Principles in Scala](https://www.coursera.org/learn/progfun1/home/welcome) course. Viewing the first lecture, I learned that the transcripts were available in several languages, including French.
 
-I make it a habit to dedicate 20 minutes each day to learning French, using a variety of online sources. But, for now, those online sources are on hold as I spend my daily 20-minute sessions reading and copying the Scala lectures in French. Not only am I learning Scala, but also I'm meeting my autodidactic commitment in French.
+I make a habit of dedicating 20 minutes each day to learning French, using a variety of online sources. But, for now, those online sources are on hold as I spend my daily 20-minute sessions reading and copying the Scala lectures in French. Not only am I learning Scala, but also I'm meeting my autodidactic commitment in French.
 
 Ç'est très utile.
 
