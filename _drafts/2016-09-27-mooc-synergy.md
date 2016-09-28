@@ -4,7 +4,7 @@ title: 'MOOC Synergy'
 date: '2006-09-27'
 ---
 
-In the *Seven Habits of Highly Successful People*, author Stephen Covey wrote as his 6th habit:
+In the *Seven Habits of Highly Successful People*, author Stephen Covey wrote as his 6th habit, entitled Synergy:
 
 > Synergy is everywhere in nature. If you plant two plants close together, the roots comingle and 
 > improve the quality of the soil so that both plants will grow better than if they were separated. [...] The whole 
@@ -25,5 +25,7 @@ I make it a habit to dedicate 20 minutes each day to learning French, using a va
 
 Ç'est très utile.
 
-* References *
+*References*
+
+Covey, Stephen R. (2015) *The 7 Habits of Highly Effective People: Interactive Edition*. Retrieved from Amazon.com .
 
