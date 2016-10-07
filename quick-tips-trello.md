@@ -63,7 +63,7 @@ Trello.get('lists/57ef1521e7629ba4cf4e7be2/cards', function(cards) {
     cards[i].nameDoubleQuotesEscaped = cards[i].name.replace(/"/g, "&quot;");
     cards[i].descHTML = converter.makeHtml(cards[i].desc);
     cards[i].dataA2aUrl = "https://productivity.davidfisco.com/quicktips#" + cards[i].id;  
-    cards[i].dateMoment = moment( Date.parse(cards[0].dateLastActivity) ).format( 'MMMM Do YYYY' );
+    cards[i].dateMoment = moment( Date.parse(cards[i].dateLastActivity) ).format( 'D MMMM YYYY' );
   }
 
   rivets.bind($('#trello-payload'), {cards: cards});
