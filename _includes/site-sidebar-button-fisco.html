@@ -1,0 +1,173 @@
+<style>
+    #site-panel-fisco {
+        z-index: 2;
+    }
+
+    .site-button-common-fisco {
+        border: 1px black solid;
+        font-variant: small-caps;
+        font-weight: 900;
+        box-shadow: -5px -5px 12px -3px #CCC;
+    }
+
+    #floating-site-button-fisco {
+        position: fixed;
+        bottom: 2px;
+        right: 2px;
+    }
+
+    #floating-site-button-fisco .david-fisco,
+    #site-button-fisco .david-fisco {
+        color: darkgray;
+    }
+
+    #site-panel-fisco .ul-head-fisco {
+        font-variant: small-caps;
+    }
+
+    #site-panel-fisco ul {
+        padding-left: 10%;
+    }
+
+    #site-panel-fisco-handle {
+        display: flex;
+        font-size: 1vw;
+        height: 100%;
+        /* 100% Full-height */
+        width: 2vw;
+        /* 0 width - change this with JavaScript */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Stay on top */
+        cursor: pointer;
+        text-align: center;
+        top: 0;
+        left: 0;
+        background-color: #DEDEDE;
+        overflow-x: hidden;
+        /* Disable horizontal scroll */
+    }
+
+    @media (max-width: 767px) {
+      #site-panel-fisco-handle {
+        display: none;
+      }
+    }
+
+    .sidepanel-heading a {
+        font-weight: bold;
+    }
+
+    .sidepanel-heading a:before {
+        font-family: FontAwesome;
+        content: "\f078";
+        padding-right: .7em;
+    }
+
+    .sidepanel-heading a.collapsed:before {
+        content: "\f054";
+    }
+</style>
+
+{% include libraries/slidereveal.html %}
+
+<div class="avoid-premature-rendering-fisco" hidden>
+<div class="toggle-site-sidebar-fisco"
+     id="site-panel-fisco-handle"
+     style="color: #337ab7; flex-direction: column; justify-content: space-between; padding-bottom: 2vh; padding-top: 2vh;"
+     title="Toggle Site Menu">
+  <div><i class="fa fa-bars" aria-hidden="true"></i></div>
+  <div>
+    <i class="fa fa-chevron-right" aria-hidden="true"></i><br />
+    <i class="fa fa-chevron-right" aria-hidden="true"></i><br />
+    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+  </div>
+  <div style="margin-top: 2vh;">
+    <i class="fa fa-bars" aria-hidden="true"></i>
+  </div>
+</div>
+<div id="site-panel-fisco" style="background-color: #EEE; font-size: .8rem; padding: 1vh; padding-left: 2vh;">
+  <div class="text-right" style="padding-right: 1rem;">
+    <div onclick="$('#site-panel-fisco').slideReveal('hide');"
+         style="color: #337ab7; cursor: pointer; font-size: 2em;"
+         title="Close Sidebar [ESC]"><i class="fa fa-times" aria-hidden="true"></i></div></div>
+  <div style="font-variant: small-caps; font-weight: 900; font-size: 1.5em;"><span class="david-fisco" style="color: darkgray;">DAVID</span><span class="fisco-fisco">FISCO</span></div>
+  <div style="margin-top: 1.5vh;"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;<a href="http://www.davidfisco.com/about.html">About David Fisco...</a></div>
+  <div><i class="fa fa-search" aria-hidden="true"></i>&nbsp;<a href="#" onclick="event.preventDefault(); $('#searchDavidFiscoDialog').modal('show');">Search site...</a></div>
+  <div class="sidepanel-heading" style="margin-top: 1.5vh;"><a class="ul-head-fisco"
+                                                              data-toggle="collapse"
+                                                              data-target="#topicsSidebarPanel"
+                                                              aria-expanded="false"
+                                                              aria-controls="topicsSidebarPanel">SITE TOPICS</a></div>
+  <div class="collapseableSidebarPanel" id="topicsSidebarPanel">
+    <ul>
+      <li><a href="http://generalapps.davidfisco.com/dcw">Dave's Choice Words</a></li>
+      <li><a href="http://generalapps.davidfisco.com/dcw/sort">Dave's Choice Words: Sort!</a></li>
+      <li><a href="http://foodie.davidfisco.com">Foodie</a></li>
+      <li><a href="http://languagearts.davidfisco.com/">Language Arts</a></li>
+      <li><a href="http://personal-wikis.davidfisco.com">Personal Wikis</a></li>
+      <li><a href="http://philosophy.davidfisco.com/">Philosophy (Objectivism)</a></li>
+      <li><a href="http://productivity.davidfisco.com/">Productivity</a></li>
+      <li><a href="http://rote.davidfisco.com/">Rote: Shakespeare</a></li>
+      <li><a href="http://software.davidfisco.com/">Software</a></li>
+      <li><a href="http://generalapps.davidfisco.com/synonymical/play">Synonmical</a></li>
+    </ul>
+  </div>
+  <div class="sidepanel-heading"><a class="ul-head-fisco"
+                                    data-toggle="collapse"
+                                    data-target="#contactSidebarPanel"
+                                    aria-expanded="false"
+                                    aria-controls="contactSidebarPanel">CONTACT</a></div>
+  <div class="collapseableSidebarPanel" id="contactSidebarPanel">
+    <ul>
+      <li><a href="mailto:dave@davidfisco.com">Email David Fisco</a></li>
+      <li><a href="https://docs.google.com/a/davidfisco.com/forms/d/1owZHNQmZIrgWpuz3G6peKm-9JV8Ulypz4K5VLTdHen8/viewform" target="_blank">Email David Fisco via Web Form</a></li>
+    </ul>
+  </div>
+  <div class="sidepanel-heading"><a class="ul-head-fisco"
+                                    data-toggle="collapse"
+                                    data-target="#socialmediaSidebarPanel"
+                                    aria-expanded="false"
+                                    aria-controls="socialmediaSidebarPanel">SOCIAL MEDIA</a></div>
+  <div class="collapseableSidebarPanel" id="socialmediaSidebarPanel">
+    <ul>
+      <li id='david-fisco-on-google-plus'>
+        <a class='' href='https://plus.google.com/116734396562610707415' title='Follow David Fisco on Google+'>
+          Google+
+        </a>
+      </li>
+      <li><a href="https://twitter.com/davidfisco">Twitter</a></li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<script>
+$(function($) {
+  var slider = $("#site-panel-fisco").slideReveal({
+    trigger: $(".toggle-site-sidebar-fisco"),
+    push: false
+  });
+  $(".avoid-premature-rendering-fisco").show();
+
+  $('.collapseableSidebarPanel').collapse();
+});
+
+/* Use classes and CSS to underline all tagged links to the site menu. */
+document.addEventListener("DOMContentLoaded", function () {
+  var sidebarRevealers = document.querySelectorAll(".toggle-site-sidebar-fisco");
+  sidebarRevealers.forEach(function(element) {
+    element.addEventListener("mouseover", function() {
+      document.querySelectorAll(".highlight-with-toggle-site-sidebar-fisco").forEach(function(toUnderline) {
+        toUnderline.style.textDecoration = "underline";
+      });
+    });
+    element.addEventListener("mouseout", function() {
+      document.querySelectorAll(".highlight-with-toggle-site-sidebar-fisco").forEach(function(toUnderline) {
+        toUnderline.style.textDecoration = "none";
+      });
+    });
+  });
+});
+</script>

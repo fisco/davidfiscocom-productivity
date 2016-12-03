@@ -1,0 +1,41 @@
+<style>
+    #site-footer-fisco {
+      background: #fff;
+      border-top: 2px black solid;
+      box-shadow: 0 -15px 10px rgba(255, 255, 255, .9)
+    }
+    #site-footer-fisco button {
+      border: none;
+      margin-top: .5em;
+    }
+    #site-footer-fisco button:first-of-type {
+      padding-left: 2px;
+    }
+    #site-footer-fisco button:hover {
+      background: inherit;
+    }
+
+</style>
+
+<div class="navbar navbar-fixed-bottom" role="navigation" id="site-footer-fisco">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-10">
+          <div>{% include site-button-fisco.html %}</div>
+          <div>
+                  <a href="https://www.davidfisco.com/about.html" class="fisco-brand" style="color: inherit;
+                                                                                            font-size: 2.1rem;
+                                                                                            font-family: 'Alegreya Sans SC', sans-serif;
+                                                                                            font-weight: 700;
+                                                                                            text-decoration: inherit;">
+                    <span style="color: silver;">David</span><span>Fisco</span>
+                  </a>
+          </div>
+          
+      </div>
+      <div class="col-xs-2 text-right" style="padding-right: 0;">
+          {% include site-search-button-fisco.html %}
+      </div>
+     </div>
+  </div>
+</div>

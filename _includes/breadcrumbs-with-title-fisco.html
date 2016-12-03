@@ -1,0 +1,98 @@
+{% if false %}
+  {% assign headerTitle = '' %}
+  {% assign titleArray = page.title | split: ' ' %}
+  {% for w in titleArray %}
+    {% if forloop.last == true %}
+      {% capture headerTitle %}{{ headerTitle }}&nbsp;{{ w }}{% endcapture %}
+    {% else %}
+      {% capture headerTitle %}{{ headerTitle }} {{ w }}{% endcapture %}
+    {% endif %}
+  {% endfor %}
+  {% capture headerTitle %}{{ headerTitle | trim }}{% endcapture %}
+  {% capture headerTitle %}{% if page.microdataSchema == 'Recipe' %}Recipe: {% endif %}{{ headerTitle }}{% endcapture %}
+{% endif %}
+{% capture headerTitle %}{% if page.microdataSchema == 'Recipe' or page.layout == 'foodie-recipe' %}<span style="color: #999;">Recipe:</span> {% endif %}{{ page.title | trim }}{% endcapture %}
+
+<!-- Determine type of page. One of "regular", "topic" or "homepage" -->
+{% assign typeOfPage = 'regular' %}
+{% if page.isHomepage == 'yes' and site.subdomain == 'www' %}{% assign typeOfPage = 'homepage' %}{% endif %}
+{% if page.isTopicPage == 'yes' %}{% assign typeOfPage = 'topic' %}{% endif %}
+
+{% if typeOfPage == 'homepage' %}{% assign headerTitle = "Home" %}{% endif %}
+{% if typeOfPage == 'topic' %}{% assign headerTitle = site.topic | split: " " | join: "-----" | camelcase | split: "-----" | join: " " %}{% endif %}
+
+{% if typeOfPage == 'homepage' or typeOfPage != 'homepage' and headerTitle != '' or headerTitle != "Home" and headerTitle != '' %}
+  <style>
+    a.page-title-in-breadcrumbs-fisco {
+      color: inherit;
+      cursor: default;
+      display: block;
+      font-size: 2rem;
+      line-height: normal;
+      text-decoration: inherit;
+    }
+    .breadcrumb-minor-fisco {
+      text-transform: uppercase;
+    }
+    #site-header-breadcrumbs-wrapper i.fa-angle-double-right {
+      color: #999999;
+    }
+    @media (min-width: 550px) {
+      a.page-title-in-breadcrumbs-fisco {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+
+  <!-- {% increment position_counter %} -->
+  {% assign something_before = false %}
+  <div class="row">
+  <div class="col-xs-12" id="site-header-breadcrumbs-wrapper" style="margin-top 1vh;">
+    <a class="toggle-site-sidebar-fisco" title="Toggle Site Menu"><i class="fa fa-bars" aria-hidden="true" style="cursor: pointer;"></i></a>
+    <a class="breadcrumb-minor-fisco highlight-with-toggle-site-sidebar-fisco toggle-site-sidebar-fisco" style="cursor: pointer;" title="Toggle Site Menu">MENU</a>
+    <span> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </span>
+    <span class="breadcrumbs-with-title-fisco" id="site-header-breadcrumbs" itemid="#breadcrumblist" itemscope itemtype="https://schema.org/BreadcrumbList">
+      {% if typeOfPage == 'homepage' %}
+        <div style="display: inline-block; font-size: 2.5rem; margin-bottom: 2.75vh;">{% include david-fisco-logo-text.html %}</div>
+      {% endif %}
+      {% if typeOfPage != 'homepage' and headerTitle != '' %}
+        <span class="home-breadcrumb-fisco breadcrumb-minor-fisco" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="https://www.davidfisco.com/" title="David Fisco's homepage"><span itemprop="name">Home</span></a>
+            <meta itemprop="position" content="{% increment position_counter %}" />
+            {% assign something_before = true %}
+        </span>
+        {% if typeOfPage != 'topic' and site.subdomain != 'www' and site.topic != '' %}
+            <span class="topic-breadcrumb-fisco breadcrumb-minor-fisco" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            {% if something_before %} <span> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </span> {% endif %}
+            <a itemprop="item" href="{{ site.url }}" title="Topic page: {{ site.topic | capitalize }}">
+                <span itemprop="name">
+                {{ site.topic | capitalize }}
+                </span>
+            </a>
+            <meta itemprop="position" content="{% increment position_counter %}" />
+            {% assign something_before = true %}
+            </span>
+        {% endif %}
+      {% endif %}
+      {% if headerTitle != "Home" and headerTitle != '' %}
+        <span class="title-breadcrumb-fisco" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span id='fisco-page-title-in-breadcrumb' itemprop="name">
+            {% if something_before %} <span> <i class="fa fa-angle-double-right" aria-hidden="true"></i> </span> {% endif %}
+            <a itemprop="item" class="page-title-in-breadcrumbs-fisco" href="{{ site.url }}{{ page.url }}" title="Title of current page">
+              {{ headerTitle | smartify }}
+            </a>
+            <meta itemprop="position" content="{% increment position_counter %}" />
+          </span>
+        </span>
+      {% endif %}
+    </span>
+  </div>
+  </div>
+{% endif %}
+
+{% capture string1 %}{{ page.pageSchema['@type'] }}{% endcapture %}
+{% capture string2 %}{{ headerTitle | smartify }}{% endcapture %}
+{% include json-ld-simple-value-script-display.html id="#pageSchema" key="name" value=string2 %}
+{% include json-ld-simple-value-script-display.html id="#pageSchema" key="headline" value=string2 %}
+{% capture string2 %}{{ site.url }}{{ page.url }}{% endcapture %}
+{% include json-ld-simple-value-script-display.html id="#pageSchema" key="url" value=string2 %}

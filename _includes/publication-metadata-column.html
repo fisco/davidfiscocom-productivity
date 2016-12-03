@@ -1,0 +1,43 @@
+<!--
+excludeByLine: true/false, default false
+excludePublicationDateInformation: true/false, default false
+-->
+
+{% assign excludePublicationDateInformation = false %}
+{% if include.excludeByLine and include.excludePublicationDateInformation %}
+  {% assign excludePublicationDateInformation = true %}
+{% endif %}
+{% if page.excludePublicationDateInformation == 'yes' %}
+  {% assign excludePublicationDateInformation = true %}
+{% endif %}
+
+<style>
+  .bare-buttons-fisco button {
+    border: 0;
+  }
+  .bare-buttons-fisco button:first-of-type {
+    padding-left: 2px;
+  }
+  .bare-buttons-fisco button:hover {
+    background: inherit;
+  }
+</style>
+
+{% unless excludePublicationDateInformation %}
+   <div class="row" style="margin-top: 1.4vh; margin-bottom: 2vh;">
+    <div class="col-xs-12 bare-buttons-fisco" style="font-size: .9rem;">
+      <div style="">
+        {% unless include.excludeByLine == true %}
+          <div class="div-for-author"><b>Written by {% include author-infocontact-popover.html include_middle_name=false %}</b></div>
+        {% endunless %}
+        {% unless include.excludePublicationDateInformation == true %}
+          <div>{% include publication-date-information.html %}</div>
+        {% endunless %}
+        <div>{% include time-for-reading.html %}</div>
+        {% unless page.excludeSocialMedia == 'yes' %}
+          <div>{% include social-media-share-custom-button.html %}</div>
+        {% endunless %}
+        </div>
+    </div>
+  </div>
+{% endunless %}
