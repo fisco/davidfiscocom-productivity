@@ -22,23 +22,39 @@
   {% endif %}
 {% endif %}
 
-<dl id="readingTime" hidden>
+<!-- <dl id="readingTime" hidden>
   <dt>Word count:</dt>
   <dd style="margin-left: 1rem;">{{ numberOfWords }}</dd>
   <dt>Estimated reading time:</dt>
   <dd style="margin-left: 1rem;">{{ readTime }}</dd>
-</dl>
+</dl> -->
 
-<button class="btn btn-default"
+<!-- <button class="btn btn-default"
         data-container="body"
         data-toggle="popover"
         data-trigger="click hover"
         data-placement="auto"
         id="pubReadingTimePopover">
         <i class="fa fa-clock-o" aria-hidden="true"></i>
-</button>
+</button> -->
+
+<a tabindex="0"
+   role="button"
+   data-content=" {{ readTime }}"
+   data-toggle="popover"
+   data-trigger="click focus hover"
+   id="pubReadingTimePopover">Word count: {{ numberOfWords }}</a>
 
 <script>
+  $(function() {
+    $('#pubReadingTimePopover').popover({
+      html: true,
+      title: function() {
+        return "<b>Estimated reading time:</b>";
+      }
+    });
+  });
+/*
   $(function () {
     $("#pubReadingTimePopover").popover({
       html: true,
@@ -52,5 +68,5 @@
         return $('#payload-fisco');
       }
     });
-  });
+  }); */
 </script>

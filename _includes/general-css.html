@@ -1,6 +1,7 @@
 <style>
 
 body {
+    margin-top: 2vh;
     padding-bottom: 2em;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -185,20 +186,12 @@ iframe.googleDoc {
     text-align: right;
 }
 
-.copyright-fisco {
-  text-align: center;
-}
-
 #site-header-breadcrumbs div.inactive span.addCaret::after {
     color: grey;
     content: ">";
     margin-left: .5em;
     margin-right: .5em;
     font-size: .9em;
-}
-
-#site-header-breadcrumbs {
-  text-align: center;
 }
 
 #searchDavidFiscoDialogLabel {
@@ -270,6 +263,10 @@ iframe.googleDoc {
      }
    }
 
+   #payload-fisco {
+     margin-top: 3vh;
+   }
+
   #payload-fisco h1 {
     font-size: 2.3rem;
   }
@@ -279,7 +276,7 @@ iframe.googleDoc {
     font-style: italic;
   }
 
-  #payload-fisco h3 {
+  #payload-fisco :not(div.popover) h3 {
     font-size: 1.9rem;
   }
 

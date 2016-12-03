@@ -3,7 +3,7 @@
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {% if page.includeHomepageRedirects == 'yes' %}
@@ -41,27 +41,28 @@
 
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:700?text=DavidFisco" rel="stylesheet">
 
+    {% include piwik.html %}
+
 </head>
 
 <body>
 
   <div  class="container">
 
-    {% include site-header-fisco.html %}
+    {% include breadcrumbs-with-title-fisco.html %}
 
-    <span id='before-payload-fisco'></span>
+    <span id="before-payload-fisco"></span>
 
     <main class="row"
           id='payload-fisco'
           itemid="#mainContentOfPage"
-          itemscope itemtype="https://schema.org/WebPageElement"
-          style="margin-top: 1.1rem;">
+          itemscope itemtype="https://schema.org/WebPageElement">
       <div class="col-xs-12">
         {{ content | smartify }}
       </div>
     </main>
 
-    <span id='after-payload-fisco'></span>
+    <span id="after-payload-fisco"></span>
 
     {% if page.disqus_shortname and page.disqus_shortname.size > 0 %}{% include disqus-thread.html %}{% endif %}
 
@@ -75,15 +76,22 @@
         {% include legal-information-for-page-fisco.html %}
     </div>
 
-    <!-- JavaScript: bottom of page for performance reasons. -->
-    {% include libraries/bootstrap-3-current-js-link.html %}
-    {% include libraries/bootstrap-dismiss-popovers-with-click.js %}
-    {% include libraries/underscore-current-script.html %}
-    {% include libraries/rag-adjust.html %}
-    {% include libraries/google-analytics-additional-tracking.js %}
-    {% include libraries/google-analytics-page-print-intent.html %}
-    <script async src="//platform.twitter.com/widgets.js" charset="utf-8" async></script>
+
   </div>
+
+  {% comment %}{% include site-footer-fisco.html %}{% endcomment %}
+  {% include site-search-modal-fisco.html %}
+
+  <!-- JavaScript: bottom of page for performance reasons. -->
+  {% include libraries/bootstrap-3-current-js-link.html %}
+  {% include libraries/bootstrap-dismiss-popovers-with-click.js %}
+  {% include libraries/underscore-current-script.html %}
+  {% include libraries/rag-adjust.html %}
+  {% include libraries/google-analytics-additional-tracking.js %}
+  {% include libraries/google-analytics-page-print-intent.html %}
+  <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+  {% include site-sidebar-button-fisco.html %}
 
 </body>
 

@@ -11,38 +11,33 @@ excludePublicationDateInformation: true/false, default false
   {% assign excludePublicationDateInformation = true %}
 {% endif %}
 
+<style>
+  .bare-buttons-fisco button {
+    border: 0;
+  }
+  .bare-buttons-fisco button:first-of-type {
+    padding-left: 2px;
+  }
+  .bare-buttons-fisco button:hover {
+    background: inherit;
+  }
+</style>
+
 {% unless excludePublicationDateInformation %}
-  <div class="row bottom-align-row" style="margin-bottom: 1rem;">
-    <div class="col-sm-6 col-xs-12" style="font-size: .9rem;">
-      <div style="vertical-align: bottom;">
+   <div class="row" style="margin-bottom: 3.75vh;">
+    <div class="col-xs-12 bare-buttons-fisco" style="font-size: .9rem;">
+      <div style="border-left: 4px black solid; margin-left: 1.5rem; padding-left: 1rem;">
         {% unless include.excludeByLine == true %}
-          by {% include author-infocontact-popover.html include_middle_name=false %}
+          <div class="div-for-author"><b>by {% include author-infocontact-popover.html include_middle_name=false %}</b></div>
         {% endunless %}
-      </div>
-    </div>
-    <div class="col-sm-1 col-xs-12" style="font-size: .9rem;">
-      <div style="min-height: .25rem"></div>
-    </div>
-    <div class="articleMetadata col-sm-5 col-xs-12" style="font-size: .9rem;">
-      {% unless include.excludePublicationDateInformation == true %}
-        {% include publication-date-information.html %}
-      {% endunless %}
-      {% include time-for-reading.html %}
-      {% unless page.excludeSocialMedia == 'yes' %}
-        {% include social-media-share-custom-button.html %}
-      {% endunless %}
+        {% unless include.excludePublicationDateInformation == true %}
+          <div>{% include publication-date-information.html %}</div>
+        {% endunless %}
+        <div>{% include time-for-reading.html %}</div>
+        {% unless page.excludeSocialMedia == 'yes' %}
+          <div>{% include social-media-share-custom-button.html %}</div>
+        {% endunless %}
+        </div>
     </div>
   </div>
 {% endunless %}
-
-<style>
-  .articleMetadata {
-    text-align: right;
-  }
-
-  @media (max-width: 767px) {
-    .articleMetadata {
-      text-align: left;
-    }
-  }
-</style>
